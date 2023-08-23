@@ -9,13 +9,13 @@ declare module 'react-native-dropdown-picker' {
     TextInputProps,
     TextProps,
     TextStyle,
-    TouchableOpacityProps,
     ViewProps,
+    TouchableOpacityProps,
     ViewStyle,
   } from 'react-native';
 
-  type SetStateCallback<S> = (prevState: S) => S;
-  type SetStateValue<S> = (prevState: S) => S;
+  type SetStateCallback<S> = ((prevState: S) => S);
+  type SetStateValue<S> = ((prevState: S) => S);
 
   export type ValueType = string | number | boolean;
 
@@ -77,11 +77,9 @@ declare module 'react-native-dropdown-picker' {
   export interface TranslationInterface {
     PLACEHOLDER: string;
     SEARCH_PLACEHOLDER: string;
-    SELECTED_ITEMS_COUNT_TEXT:
-      | string
-      | {
-          [key in number | 'n']: string;
-        };
+    SELECTED_ITEMS_COUNT_TEXT: string | {
+      [key in (number | "n")]: string;
+    };
     NOTHING_TO_SHOW: string;
   }
 
@@ -204,6 +202,9 @@ declare module 'react-native-dropdown-picker' {
     listMode?: ListModeType;
     categorySelectable?: boolean;
     searchable?: boolean;
+    SearchLabelComponent?: (props: {
+      style: StyleProp<ViewStyle>;
+    }) => JSX.Element;
     searchPlaceholder?: string;
     schema?: Partial<SchemaInterface>;
     language?: LanguageType;
